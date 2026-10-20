@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/fotosAMS/:asset*",
+      "destination": "/:asset*"
+    },
+    {
+      "source": "/fotosEDIF/:asset*",
+      "destination": "/:asset*"
+    },
+    {
+      "source": "/fotosENF/:asset*",
+      "destination": "/:asset*"
+    },
+    {
+      "source": "/fotosMEC/:asset*",
+      "destination": "/:asset*"
+    },
+    {
+      "source": "/fotosNUT/:asset*",
+      "destination": "/:asset*"
+    }
+  ]
+}
