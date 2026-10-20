@@ -3,9 +3,500 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
 
+  <title>ETEC • Cursos Técnicos</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5fb;
+      color: #171717;
+    }
+
+    /* =========================
+       CONTAINER PRINCIPAL
+    ========================= */
+
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      border: 5px solid #000;
+      background: white;
+      overflow: hidden;
+    }
+
+    /* =========================
+       CABEÇALHO
+    ========================= */
+
+    header {
+      height: 220px;
+      background: #454bc7;
+      
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 30px 7%;
+      color: white;
+    }
+
+   
+    .linha {
+      position: absolute;
+      top: 115px;
+      left: 7%;
+      width: 130px;
+      height: 5px;
+      background: yellow;
+      border-radius: 5px;
+    }
+
+    .header-content {
+      max-width: 700px;
+      z-index: 2;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff;
+      color: #454bc7;
+      padding: 7px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    /* =========================
+       MENU
+    ========================= */
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 225px);
+    }
+
+    .menu {
+      width: 280px;
+      padding: 45px 30px;
+      border-right: 5px solid #000;
+      background: #fafafa;
+    }
+
+    .menu h2 {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .menu-btn {
+      width: 100%;
+      min-height: 85px;
+      margin-bottom: 20px;
+      border: 4px solid #000;
+      border-radius: 22px;
+      background: white;
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: left;
+      padding: 18px;
+    }
+
+    .menu-btn:hover,
+    .menu-btn.active {
+      background: #454bc7;
+      color: white;
+      transform: translateX(6px);
+    }
+
+    .menu-icon {
+      font-size: 25px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       CONTEÚDO
+    ========================= */
+
+    main {
+      flex: 1;
+      padding: 45px;
+      background: #fff;
+    }
+
+    .section {
+      display: none;
+      animation: aparecer 0.4s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #666;
+    }
+
+    /* =========================
+       PESQUISA
+    ========================= */
+
+    .search-area {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .search-area input,
+    .search-area select {
+      padding: 15px 18px;
+      border: 3px solid #000;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-area input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-area input:focus,
+    .search-area select:focus {
+      border-color: #454bc7;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .course-card {
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 23px;
+      background: white;
+      transition: 0.25s;
+      position: relative;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 7px 7px 0 #454bc7;
+    }
+
+    .course-card .emoji {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .course-card h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .area {
+      display: inline-block;
+      background: #e9eaff;
+      color: #3439a6;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .details-btn {
+      width: 100%;
+      border: 3px solid #000;
+      border-radius: 10px;
+      background: #454bc7;
+      color: white;
+      padding: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .details-btn:hover {
+      background: #000;
+    }
+
+    /* =========================
+       SOBRE
+    ========================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .about-box {
+      border: 4px solid #000;
+      border-radius: 22px;
+      padding: 30px;
+      background: #fafafa;
+    }
+
+    .about-box h3 {
+      margin-bottom: 15px;
+      font-size: 23px;
+    }
+
+    .about-box p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .number {
+      background: #454bc7;
+      color: white;
+      border: 3px solid #000;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .number strong {
+      display: block;
+      font-size: 30px;
+    }
+
+    /* =========================
+       VESTIBULINHO
+    ========================= */
+
+    .vestibulinho {
+      background: #454bc7;
+      color: white;
+      border: 4px solid #000;
+      border-radius: 25px;
+      padding: 40px;
+      max-width: 800px;
+    }
+
+    .vestibulinho h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .vestibulinho p {
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 15px 25px;
+      border: 3px solid #000;
+      border-radius: 12px;
+      background: white;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .cta:hover {
+      background: #000;
+      color: white;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(600px, 100%);
+      background: white;
+      border: 5px solid #000;
+      border-radius: 25px;
+      padding: 35px;
+      position: relative;
+      animation: aparecer 0.3s ease;
+    }
+
+    .close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      width: 40px;
+      height: 40px;
+      border: 3px solid #000;
+      border-radius: 50%;
+      background: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+      font-size: 30px;
+      color: #454bc7;
+    }
+
+    .modal-content p {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 1000px) {
+      .courses {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu {
+        width: 230px;
+      }
+    }
+
+    @media (max-width: 750px) {
+      header {
+        height: 250px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      header::after {
+        display: none;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      .menu {
+        width: 100%;
+        border-right: none;
+        border-bottom: 5px solid #000;
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 20px;
+      }
+
+      .menu h2 {
+        display: none;
+      }
+
+      .menu-btn {
+        min-width: 180px;
+        margin: 0;
+      }
+
+      main {
+        padding: 25px 18px;
+      }
+
+      .courses {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    :where(a, button, input, select, summary):focus-visible {
+      outline: 3px solid #ffbf47;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -13,7 +504,7 @@
 <div class="site">
 
   <!-- CABEÇALHO -->
-  <header>
+  <header style="border-bottom: 5px solid black;">
 
     <div class="header-content">
 
@@ -43,14 +534,14 @@
         Cursos
       </button>
 
-      <button class="menu-btn" onclick="window.location.href='https://site-guia-do-vestibulinho.netlify.app/'">
-        <span class="menu-icon">📖</span>
-        Guia do Vestibulinho
+      <button class="menu-btn" onclick="mostrarSecao('sobre', this)">
+        <span class="menu-icon">🏫</span>
+        Sobre a Etec
       </button>
 
-      <button class="menu-btn" onclick="window.location.href='https://linhadotempoetec077.netlify.app/'">
-        <span class="menu-icon">⏳</span>
-        Linha do Tempo
+      <button class="menu-btn" onclick="mostrarSecao('vestibulinho', this)">
+        <span class="menu-icon">📝</span>
+        Vestibulinho
       </button>
 
     </nav>
@@ -93,6 +584,7 @@
             <option value="Saúde">Saúde</option>
             <option value="Ciências">Ciências</option>
             <option value="Construção">Construção</option>
+
           </select>
 
         </div>
@@ -100,291 +592,156 @@
 
         <div class="courses" id="listaCursos">
 
-          <!-- NUTRIÇÃO -->
-
           <article
             class="course-card"
             data-nome="Nutrição"
             data-area="Saúde"
           >
-
             <div class="emoji">🥗</div>
-
             <span class="area">Saúde</span>
-
             <h3>Nutrição</h3>
-
             <p>
               Estude alimentação saudável, orientações nutricionais e práticas
               para promover saúde e bem-estar.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Nutrição',
-                'O curso aborda alimentação, saúde, dieta, higiene alimentar e educação nutricional, preparando o estudante para orientar pessoas em relação a hábitos saudáveis e qualidade de vida.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='NUT.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- EDIFICAÇÕES -->
 
           <article
             class="course-card"
             data-nome="Edificações"
             data-area="Construção"
           >
-
             <div class="emoji">🏗️</div>
-
             <span class="area">Construção</span>
-
             <h3>Edificações</h3>
-
             <p>
               Aprenda sobre materiais, planta baixa, execução de obras e organização
               do ambiente construído.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Edificações',
-                'O curso forma profissionais para atuar na construção civil, estudando materiais, leitura de projetos, execução de obras, acabamento e organização da obra.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='EDIF.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS -->
 
           <article
             class="course-card"
             data-nome="Ciências da Natureza e suas Tecnologias"
             data-area="Ciências"
           >
-
             <div class="emoji">🔬</div>
-
             <span class="area">Ciências</span>
-
             <h3>Ciências da Natureza e suas Tecnologias</h3>
-
             <p>
               Conheça a biologia, a química, a física e suas aplicações na vida
               cotidiana e no avanço tecnológico.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Ciências da Natureza e suas Tecnologias',
-                'O curso explora fenômenos naturais e tecnologias, estimulando o raciocínio científico, a investigação e a compreensão do mundo por meio de biologia, química e física.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='CNT.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- ADMINISTRAÇÃO -->
 
           <article
             class="course-card"
             data-nome="Administração"
             data-area="Gestão"
           >
-
             <div class="emoji">📊</div>
-
             <span class="area">Gestão</span>
-
             <h3>Administração</h3>
-
             <p>
               Desenvolva habilidades de planejamento, organização, finanças e gestão
               de pessoas e negócios.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Administração',
-                'A formação em Administração prepara o estudante para organizar recursos, liderar equipes, planejar ações e compreender o funcionamento de empresas e organizações.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='ADM.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- MECÂNICA -->
 
           <article
             class="course-card"
             data-nome="Mecânica"
             data-area="Indústria"
           >
-
             <div class="emoji">🔧</div>
-
             <span class="area">Indústria</span>
-
             <h3>Mecânica</h3>
-
             <p>
               Aprenda sobre manutenção, máquinas, ferramentas e processos mecânicos
               aplicados à indústria e às oficinas técnicas.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Mecânica',
-                'O curso oferece formação em manutenção, usinagem, medidas, desenho técnico e operação de máquinas, preparando o aluno para atuar em empresas industriais e oficinas.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='MEC.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- ENFERMAGEM -->
 
           <article
             class="course-card"
             data-nome="Enfermagem"
             data-area="Saúde"
           >
-
             <div class="emoji">🩺</div>
-
             <span class="area">Saúde</span>
-
             <h3>Enfermagem</h3>
-
             <p>
               Estude cuidados com a saúde, biossegurança, assistência ao paciente e
               procedimentos essenciais da área.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Enfermagem',
-                'O curso prepara profissionais para prestar atenção, acolhimento e cuidados básicos de saúde, com foco em procedimentos, biossegurança e assistência ao paciente.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='ENF.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- MARKETING -->
 
           <article
             class="course-card"
             data-nome="Marketing"
             data-area="Gestão"
           >
-
             <div class="emoji">📱</div>
-
             <span class="area">Gestão</span>
-
             <h3>Marketing</h3>
-
             <p>
               Desenvolva estratégias de comunicação, publicidade e gestão de marcas
               para o mercado e as redes sociais.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Marketing',
-                'O curso forma profissionais para criar e executar estratégias de comunicação, publicidade, gestão de marcas e campanhas de marketing digital e tradicional.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='MKT.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- ARTICULADO MÉDIO SUPERIOR -->
 
           <article
             class="course-card"
-            data-nome="Articulado Médio Superior"
+            data-nome="Desenvolvimento de Sistemas"
             data-area="Tecnologia"
           >
-
-            <div class="emoji">💼</div>
-
+            <div class="emoji">💻</div>
             <span class="area">Tecnologia</span>
-
-            <h3>Articulado Médio Superior</h3>
-
+            <h3>Desenvolvimento de Sistemas</h3>
             <p>
-              Programa que articula o ensino médio com formação técnica superior,
-              obtendo ambas as certificações simultaneamente.
+              Aprenda programação, banco de dados, desenvolvimento web e criação de sistemas.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Articulado Médio Superior',
-                'O programa articula o ensino médio com a formação técnica, permitindo que os alunos obtenham as duas certificações simultaneamente, preparando-se para o mercado de trabalho e prosseguimento aos estudos.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='AMS.html'">
+              Ver curso
             </button>
-
           </article>
-
-
-          <!-- LOGÍSTICA -->
 
           <article
             class="course-card"
             data-nome="Logística"
             data-area="Gestão"
           >
-
             <div class="emoji">📝</div>
-
             <span class="area">Gestão</span>
-
             <h3>Logística</h3>
-
             <p>
               Aprenda a organizar fluxos de materiais, distribuição e gestão da
               cadeia de suprimentos em operações logísticas.
             </p>
-
-            <button
-              class="details-btn"
-              onclick="abrirModal(
-                'Logística',
-                'O curso prepara profissionais para gerenciar fluxos de materiais, coordenar distribuição, otimizar processos de armazenagem e gerenciar a cadeia de suprimentos.'
-              )"
-            >
-              Ver detalhes
+            <button type="button" class="details-btn" onclick="window.location.href='LOG.html'">
+              Ver curso
             </button>
-
           </article>
 
         </div>
@@ -485,7 +842,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Acessar Vestibulinho →
+            Acessar Vestibulinho Etec →
           </a>
           <a class="cta" href="https://www.cps.sp.gov.br/etec/" target="_blank" rel="noopener noreferrer">Conheça as Etecs</a>
           <a class="cta" href="https://www.cps.sp.gov.br/institucional/fale-conosco/" target="_blank" rel="noopener noreferrer">Fale com o CPS</a>
