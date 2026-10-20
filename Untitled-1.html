@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ETEC • Cursos Técnicos</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5fb;
+      color: #171717;
+    }
+
+    /* =========================
+       CONTAINER PRINCIPAL
+    ========================= */
+
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      border: 5px solid #000;
+      background: white;
+      overflow: hidden;
+    }
+
+    /* =========================
+       CABEÇALHO
+    ========================= */
+
+    header {
+      height: 220px;
+      background: #454bc7;
+      
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 30px 7%;
+      color: white;
+    }
+
+   
+    .linha {
+      position: absolute;
+      top: 115px;
+      left: 7%;
+      width: 130px;
+      height: 5px;
+      background: yellow;
+      border-radius: 5px;
+    }
+
+    .header-content {
+      max-width: 700px;
+      z-index: 2;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff;
+      color: #454bc7;
+      padding: 7px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
+    /* =========================
+       MENU
+    ========================= */
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 225px);
+    }
+
+    .menu {
+      width: 280px;
+      padding: 45px 30px;
+      border-right: 5px solid #000;
+      background: #fafafa;
+    }
+
+    .menu h2 {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .menu-btn {
+      width: 100%;
+      min-height: 85px;
+      margin-bottom: 20px;
+      border: 4px solid #000;
+      border-radius: 22px;
+      background: white;
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: left;
+      padding: 18px;
+    }
+
+    .menu-btn:hover,
+    .menu-btn.active {
+      background: #454bc7;
+      color: white;
+      transform: translateX(6px);
+    }
+
+    .menu-icon {
+      font-size: 25px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       CONTEÚDO
+    ========================= */
+
+    main {
+      flex: 1;
+      padding: 45px;
+      background: #fff;
+    }
+
+    .section {
+      display: none;
+      animation: aparecer 0.4s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #666;
+    }
+
+    /* =========================
+       PESQUISA
+    ========================= */
+
+    .search-area {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .search-area input,
+    .search-area select {
+      padding: 15px 18px;
+      border: 3px solid #000;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-area input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-area input:focus,
+    .search-area select:focus {
+      border-color: #454bc7;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .course-card {
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 23px;
+      background: white;
+      transition: 0.25s;
+      position: relative;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 7px 7px 0 #454bc7;
+    }
+
+    .course-card .emoji {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .course-card h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .area {
+      display: inline-block;
+      background: #e9eaff;
+      color: #3439a6;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .details-btn {
+      width: 100%;
+      border: 3px solid #000;
+      border-radius: 10px;
+      background: #454bc7;
+      color: white;
+      padding: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .details-btn:hover {
+      background: #000;
+    }
+
+    /* =========================
+       SOBRE
+    ========================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .about-box {
+      border: 4px solid #000;
+      border-radius: 22px;
+      padding: 30px;
+      background: #fafafa;
+    }
+
+    .about-box h3 {
+      margin-bottom: 15px;
+      font-size: 23px;
+    }
+
+    .about-box p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .number {
+      background: #454bc7;
+      color: white;
+      border: 3px solid #000;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .number strong {
+      display: block;
+      font-size: 30px;
+    }
+
+    /* =========================
+       VESTIBULINHO
+    ========================= */
+
+    .vestibulinho {
+      background: #454bc7;
+      color: white;
+      border: 4px solid #000;
+      border-radius: 25px;
+      padding: 40px;
+      max-width: 800px;
+    }
+
+    .vestibulinho h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .vestibulinho p {
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 15px 25px;
+      border: 3px solid #000;
+      border-radius: 12px;
+      background: white;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .cta:hover {
+      background: #000;
+      color: white;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(600px, 100%);
+      background: white;
+      border: 5px solid #000;
+      border-radius: 25px;
+      padding: 35px;
+      position: relative;
+      animation: aparecer 0.3s ease;
+    }
+
+    .close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      width: 40px;
+      height: 40px;
+      border: 3px solid #000;
+      border-radius: 50%;
+      background: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+      font-size: 30px;
+      color: #454bc7;
+    }
+
+    .modal-content p {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 1000px) {
+      .courses {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu {
+        width: 230px;
+      }
+    }
+
+    @media (max-width: 750px) {
+      header {
+        height: 250px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      header::after {
+        display: none;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      .menu {
+        width: 100%;
+        border-right: none;
+        border-bottom: 5px solid #000;
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 20px;
+      }
+
+      .menu h2 {
+        display: none;
+      }
+
+      .menu-btn {
+        min-width: 180px;
+        margin: 0;
+      }
+
+      main {
+        padding: 25px 18px;
+      }
+
+      .courses {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    :where(a, button, input, select, summary):focus-visible {
+      outline: 3px solid #ffbf47;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="site">
+
+  <!-- CABEÇALHO -->
+  <header style="border-bottom: 5px solid black;">
+
+    <div class="header-content">
+
+      <span class="tag">CENTRO PAULA SOUZA</span>
+
+      <h1>Seu futuro começa aqui.</h1>
+
+      <p>
+        Explore os cursos técnicos das Etecs e encontre
+        uma formação que combina com seus objetivos.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <div class="layout">
+
+    <!-- MENU LATERAL -->
+    <nav class="menu">
+
+      <h2>MENU</h2>
+
+      <button class="menu-btn active" onclick="mostrarSecao('cursos', this)">
+        <span class="menu-icon">🎓</span>
+        Cursos
+      </button>
+
+      <button class="menu-btn" onclick="mostrarSecao('sobre', this)">
+        <span class="menu-icon">🏫</span>
+        Sobre a Etec
+      </button>
+
+      <button class="menu-btn" onclick="mostrarSecao('vestibulinho', this)">
+        <span class="menu-icon">📝</span>
+        Vestibulinho
+      </button>
+
+    </nav>
+
+
+    <!-- CONTEÚDO -->
+    <main>
+
+      <!-- ================= CURSOS ================= -->
+
+      <section id="cursos" class="section active">
+
+        <div class="section-title">
+
+          <h2>Encontre seu curso</h2>
+
+          <p>
+            Pesquise entre algumas das áreas de formação técnica oferecidas pelas Etecs.
+          </p>
+
+        </div>
+
+
+        <div class="search-area">
+
+          <input
+            type="text"
+            id="pesquisa"
+            aria-label="Pesquisar cursos pelo nome"
+            placeholder="🔎 Digite o nome do curso..."
+            oninput="filtrarCursos()"
+          >
+
+          <select id="filtro" aria-label="Filtrar cursos por área" onchange="filtrarCursos()">
+
+            <option value="todos">Todas as áreas</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Gestão">Gestão</option>
+            <option value="Indústria">Indústria</option>
+            <option value="Saúde">Saúde</option>
+            <option value="Ciências">Ciências</option>
+            <option value="Construção">Construção</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="courses" id="listaCursos">
+
+          <article
+            class="course-card"
+            data-nome="Nutrição"
+            data-area="Saúde"
+          >
+            <div class="emoji">🥗</div>
+            <span class="area">Saúde</span>
+            <h3>Nutrição</h3>
+            <p>
+              Estude alimentação saudável, orientações nutricionais e práticas
+              para promover saúde e bem-estar.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='NUT.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Edificações"
+            data-area="Construção"
+          >
+            <div class="emoji">🏗️</div>
+            <span class="area">Construção</span>
+            <h3>Edificações</h3>
+            <p>
+              Aprenda sobre materiais, planta baixa, execução de obras e organização
+              do ambiente construído.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='EDIF.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Ciências da Natureza e suas Tecnologias"
+            data-area="Ciências"
+          >
+            <div class="emoji">🔬</div>
+            <span class="area">Ciências</span>
+            <h3>Ciências da Natureza e suas Tecnologias</h3>
+            <p>
+              Conheça a biologia, a química, a física e suas aplicações na vida
+              cotidiana e no avanço tecnológico.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='CNT.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Administração"
+            data-area="Gestão"
+          >
+            <div class="emoji">📊</div>
+            <span class="area">Gestão</span>
+            <h3>Administração</h3>
+            <p>
+              Desenvolva habilidades de planejamento, organização, finanças e gestão
+              de pessoas e negócios.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='ADM.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Mecânica"
+            data-area="Indústria"
+          >
+            <div class="emoji">🔧</div>
+            <span class="area">Indústria</span>
+            <h3>Mecânica</h3>
+            <p>
+              Aprenda sobre manutenção, máquinas, ferramentas e processos mecânicos
+              aplicados à indústria e às oficinas técnicas.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='MEC.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Enfermagem"
+            data-area="Saúde"
+          >
+            <div class="emoji">🩺</div>
+            <span class="area">Saúde</span>
+            <h3>Enfermagem</h3>
+            <p>
+              Estude cuidados com a saúde, biossegurança, assistência ao paciente e
+              procedimentos essenciais da área.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='ENF.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Marketing"
+            data-area="Gestão"
+          >
+            <div class="emoji">📱</div>
+            <span class="area">Gestão</span>
+            <h3>Marketing</h3>
+            <p>
+              Desenvolva estratégias de comunicação, publicidade e gestão de marcas
+              para o mercado e as redes sociais.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='MKT.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Desenvolvimento de Sistemas"
+            data-area="Tecnologia"
+          >
+            <div class="emoji">💻</div>
+            <span class="area">Tecnologia</span>
+            <h3>Desenvolvimento de Sistemas</h3>
+            <p>
+              Aprenda programação, banco de dados, desenvolvimento web e criação de sistemas.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='AMS.html'">
+              Ver curso
+            </button>
+          </article>
+
+          <article
+            class="course-card"
+            data-nome="Logística"
+            data-area="Gestão"
+          >
+            <div class="emoji">📝</div>
+            <span class="area">Gestão</span>
+            <h3>Logística</h3>
+            <p>
+              Aprenda a organizar fluxos de materiais, distribuição e gestão da
+              cadeia de suprimentos em operações logísticas.
+            </p>
+            <button type="button" class="details-btn" onclick="window.location.href='LOG.html'">
+              Ver curso
+            </button>
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= SOBRE ================= -->
+
+      <section id="sobre" class="section">
+
+        <div class="section-title">
+
+          <h2>Sobre as Etecs</h2>
+
+          <p>
+            Educação profissional pública e gratuita no Estado de São Paulo.
+          </p>
+
+        </div>
+
+
+        <div class="about">
+
+          <div class="about-box">
+
+            <h3>🎓 Formação profissional</h3>
+
+            <p>
+              As Escolas Técnicas Estaduais (Etecs) são administradas
+              pelo Centro Paula Souza e oferecem formação técnica em
+              diferentes áreas do conhecimento e do mercado de trabalho.
+            </p>
+
+          </div>
+
+
+          <div class="about-box">
+
+            <h3>🚀 Prepare-se para o futuro</h3>
+
+            <p>
+              Os cursos combinam conhecimentos teóricos e práticos
+              para desenvolver competências profissionais e ampliar
+              as possibilidades de inserção no mercado de trabalho.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="numbers">
+
+          <div class="number">
+            <strong>229+</strong>
+            Etecs
+          </div>
+
+          <div class="number">
+            <strong>260+</strong>
+            Cursos
+          </div>
+
+          <div class="number">
+            <strong>SP</strong>
+            Estado de São Paulo
+          </div>
+
+          <div class="number">
+            <strong>100%</strong>
+            Ensino público
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= VESTIBULINHO ================= -->
+
+      <section id="vestibulinho" class="section">
+
+        <div class="vestibulinho">
+
+          <h2>Pronto para começar?</h2>
+
+          <p>
+            O ingresso nos cursos técnicos é realizado por meio
+            do Vestibulinho Etec. Consulte os cursos disponíveis,
+            requisitos, calendário e informações do processo seletivo
+            diretamente nos canais oficiais.
+          </p>
+
+          <a
+            class="cta"
+            href="https://vestibulinho.etec.sp.gov.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Acessar Vestibulinho Etec →
+          </a>
+          <a class="cta" href="https://www.cps.sp.gov.br/etec/" target="_blank" rel="noopener noreferrer">Conheça as Etecs</a>
+          <a class="cta" href="https://www.cps.sp.gov.br/institucional/fale-conosco/" target="_blank" rel="noopener noreferrer">Fale com o CPS</a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" aria-describedby="modalTexto" tabindex="-1">
+
+  <div class="modal-content">
+
+    <button class="close" type="button" aria-label="Fechar detalhes do curso" onclick="fecharModal()">×</button>
+
+    <h2 id="modalTitulo"></h2>
+
+    <p id="modalTexto"></p>
+
+    <button
+      class="details-btn"
+      onclick="fecharModal()"
+    >
+      Fechar
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* =========================
+     TROCAR SEÇÕES
+  ========================= */
+
+  function mostrarSecao(id, botao) {
+
+    document.querySelectorAll(".section").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".menu-btn").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    botao.classList.add("active");
+  }
+
+
+  /* =========================
+     FILTRAR CURSOS
+  ========================= */
+
+  function filtrarCursos() {
+
+    const pesquisa =
+      document.getElementById("pesquisa")
+      .value
+      .toLowerCase();
+
+    const area =
+      document.getElementById("filtro")
+      .value;
+
+    const cursos =
+      document.querySelectorAll(".course-card");
+
+    cursos.forEach(curso => {
+
+      const nome =
+        curso.dataset.nome.toLowerCase();
+
+      const areaCurso =
+        curso.dataset.area;
+
+      const encontrouNome =
+        nome.includes(pesquisa);
+
+      const encontrouArea =
+        area === "todos" ||
+        areaCurso === area;
+
+      if (encontrouNome && encontrouArea) {
+
+        curso.style.display = "block";
+
+      } else {
+
+        curso.style.display = "none";
+
+      }
+
+    });
+
+  }
+
+
+  /* =========================
+     MODAL
+  ========================= */
+
+  let elementoAnteriorAoModal = null;
+
+  function abrirModal(titulo, texto) {
+
+    elementoAnteriorAoModal = document.activeElement;
+
+    document.getElementById("modalTitulo").textContent = titulo;
+
+    document.getElementById("modalTexto").textContent = texto;
+
+    document.getElementById("modal").classList.add("show");
+    document.getElementById("modal").focus();
+
+  }
+
+
+  function fecharModal() {
+
+    document.getElementById("modal").classList.remove("show");
+    if (elementoAnteriorAoModal && typeof elementoAnteriorAoModal.focus === "function") {
+      elementoAnteriorAoModal.focus();
+    }
+
+  }
+
+
+  /* Fecha clicando fora do modal */
+
+  document.getElementById("modal").addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === this) {
+        fecharModal();
+      }
+
+    }
+  );
+
+
+  /* Fecha usando ESC */
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Escape") {
+        fecharModal();
+      } else if (event.key === "Tab" && document.getElementById("modal").classList.contains("show")) {
+        const modal = document.getElementById("modal");
+        const controls = modal.querySelectorAll("button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex='-1'])");
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
